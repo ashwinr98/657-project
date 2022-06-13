@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import Login from "./screens/login";
+import Quotes from "./screens/quotes";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
  
 const Stack = createNativeStackNavigator();
@@ -18,8 +19,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={navStyling}>
-        <Stack.Screen name="Login" component={Login} />
- 
+        <Stack.Screen name='Login' component={Login} />
+        <Stack.Screen name='Quote' component={Quotes}/>
+        
       </Stack.Navigator>
     </NavigationContainer>
   );
