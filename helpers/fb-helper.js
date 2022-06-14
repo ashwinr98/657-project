@@ -18,6 +18,6 @@ export function initQuoteDB() {
   export function storeQuoteItem(item) {
     console.log('Writing: ', item);
     const db = getDatabase();
-    const reference = ref(db, "quotes/1");
+    const reference = ref(db, "quotes/");
     push(reference, item);
   }

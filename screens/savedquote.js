@@ -16,9 +16,12 @@ import {
     {
     const response = await fetch(url);
     var data = await response.json();
-    console.log(data);
-    setSaved(data)
+    // console.log(data);
+    var newArrayDataOfOjbect = Object.values(data)
+    // console.log('array', newArrayDataOfOjbect)
+    setSaved(...savd, newArrayDataOfOjbect)
     }
+    // console.log("sample",itms)
     console.log("saved",savd)
 
     useEffect(() => {
@@ -38,29 +41,27 @@ import {
     };
 
     return(
-<FlatList
-      style={styles.screen}
-      keyExtractor={(item) => `${item.qt}`}
+        <View>
+    <FlatList
+
+      keyExtractor={(item) => item.auth}
       data={savd}
       ItemSeparatorComponent={FlatListItemSeparator}
       renderItem={({ index, item }) => {
-        // var dt = new Date(item.timestamp);
         return (
- 
-            <View style={styles.container}>
-              <Text style={styles.pointStyle}>
-                {" "}
-                Start: {`${item.qt}`}{" "}
-              </Text>
-              {/* <Text style={styles.pointStyle}>
-                {" "}
-                End: {`${item.p2.lat}, ${item.p2.lon}`}{" "}
-              </Text>
-              <Text style={styles.dateStyle}> {dt.toString()} </Text> */}
-            </View>
+            <View>
+        <Text>
+            Quote: {item.qt}
+        </Text>
+        <Text>
+                Author: {item.auth}
+        </Text>
+        </View>
         );
       }}
+
     />
+    </View>
   );
 };
 
