@@ -9,12 +9,23 @@ import {
   Button,
   TouchableOpacity,
 } from "react-native";
+import { initQuoteDB, storeQuoteItem } from "../helpers/fb-helper";
 export default function Quotes({route, navigation}){
+  
+  useEffect(() => {
+    try {
+      initQuoteDB();
+    } catch (err) {
+      console.log(err);
+    }
+
+  }, []);
+
     
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+        <TouchableOpacity onPress={() => navigation.navigate("SavedQuote")}>
           <Text style={styles.headerButton}> Saved </Text>
         </TouchableOpacity>
       ),
@@ -35,7 +46,9 @@ export default function Quotes({route, navigation}){
     }
 
     // getapi(api_url);
-    
+    function saveqt(){
+
+    }
     return(
       
       <View>
@@ -59,7 +72,7 @@ export default function Quotes({route, navigation}){
       style={styles.buttons}
       color='#8B8000'
       title="Save Quote"
-      onPress={() => saveqt()}
+      onPress={() => storeQuoteItem(quote)}
         />
         
         </View>
