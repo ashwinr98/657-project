@@ -24,9 +24,9 @@ export default function Login({ navigation }) {
   const api_url = "https://semproject-9a86b-default-rtdb.firebaseio.com/users.json"
   
   useEffect(() => {
-    getExistingUsersData(api_url)    
+    getExistingUsersData(api_url) 
   },[]);
-
+  
   async function getExistingUsersData(url)
   {
       const response = await fetch(url);
@@ -116,15 +116,12 @@ export default function Login({ navigation }) {
         setAuthFailedErrMsg("Invalid email or password. Please try again.")
       }
       else {
-        navigation.navigate("Quote")
+        navigation.navigate("Quote", {username: email})
       }
     }
   }
-  function validateCredentials() {
-    //Force re-render of component by adding some random text to state variable
-    //This is required to reload/fetch Users info from API before validating
-    setAuthFailedErrMsg("Validating credentials..."+new Date().getTime())
-    setAuthFailedErrMsg("")
+  async function validateCredentials() {
+    await getExistingUsersData(api_url)   
     for (var i=0; i < existingUsers.length; i++) {
       if(existingUsers[i].email == email && existingUsers[i].password == password) {
           return true;
