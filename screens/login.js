@@ -35,10 +35,10 @@ export default function Login({ navigation }) {
       if(data != null && data != '') {
           var newArrayDataOfOjbect = Object.values(data)
           // console.log('array', newArrayDataOfOjbect)
-          setExistingUsers(...existingUsers, newArrayDataOfOjbect)
+          setExistingUsers(newArrayDataOfOjbect);
       }
       else {
-          setExistingUsers(...existingUsers, [])
+        setExistingUsers([]);
       }
   }
 
@@ -93,6 +93,7 @@ export default function Login({ navigation }) {
   );
   function doValidateAndLogin() {
     Keyboard.dismiss();
+    setAuthFailedErrMsg("");
     let fieldsValidationFailed = false;
     if(email == '' || !(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
       setEmailErrMsg("Enter a valid email address");
@@ -120,8 +121,8 @@ export default function Login({ navigation }) {
       }
     }
   }
-  async function validateCredentials() {
-    await getExistingUsersData(api_url)   
+  function validateCredentials() {
+    getExistingUsersData(api_url)
     for (var i=0; i < existingUsers.length; i++) {
       if(existingUsers[i].email == email && existingUsers[i].password == password) {
           return true;
