@@ -31,7 +31,7 @@ export default function Login({ navigation }) {
   {
       const response = await fetch(url);
       var data = await response.json();
-      console.log(data);
+      //console.log(data);
       if(data != null && data != '') {
           var newArrayDataOfOjbect = Object.values(data)
           // console.log('array', newArrayDataOfOjbect)
@@ -67,6 +67,7 @@ export default function Login({ navigation }) {
         <Input
           style={styles.input}
           placeholder="Enter password"
+          secureTextEntry={true}
           value={password}
           autoCorrect={false}
           errorStyle={styles.inputError}

@@ -33,7 +33,7 @@ export default function CreateAccount({route, navigation}) {
     {
         const response = await fetch(url);
         var data = await response.json();
-         console.log(data);
+        //console.log(data);
         if(data != null && data != '') {
             var newArrayDataOfOjbect = Object.values(data)
             // console.log('array', newArrayDataOfOjbect)
@@ -70,6 +70,7 @@ export default function CreateAccount({route, navigation}) {
           <Input
             style={styles.input}
             placeholder="Enter password"
+            secureTextEntry={true}
             value={password}
             autoCorrect={false}
             errorStyle={styles.inputError}
@@ -79,6 +80,7 @@ export default function CreateAccount({route, navigation}) {
           <Input
             style={styles.input}
             placeholder="Confirm password"
+            secureTextEntry={true}
             value={confirmpassword}
             autoCorrect={false}
             errorStyle={styles.inputError}
@@ -127,11 +129,7 @@ export default function CreateAccount({route, navigation}) {
           setDisplayErrorMsg("")
           fieldsValidationFailed = true
         }
-        else {
-          setEmailErrMsg("");
-        }
-
-        if(isEmailAlreadyExists()) {
+        else if(isEmailAlreadyExists()) {
             setEmailErrMsg("This email address already exists. Please choose a different email address.");
             setDisplayErrorMsg("")
             fieldsValidationFailed = true        
@@ -162,10 +160,6 @@ export default function CreateAccount({route, navigation}) {
             setPwdErrMsg("passwords dont match. please try again.");
             setConfirmPwdErrMsg("passwords dont match. please try again.");
             fieldsValidationFailed = true
-        }
-        else {
-            setPwdErrMsg("");
-            setConfirmPwdErrMsg("");
         }
 
         if(!fieldsValidationFailed) {
