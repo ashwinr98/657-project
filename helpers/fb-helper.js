@@ -15,10 +15,10 @@ export function initQuoteDB() {
     initializeApp(firebaseConfig);
   }
   
-  export function storeQuoteItem(item) {
+  export function storeQuoteItem(item,username) {
     console.log('Writing: ', item);
     const db = getDatabase();
-    const reference = ref(db, "quotes/");
+    const reference = ref(db, `quotes/${username}/`);
     push(reference, item);
   }
 

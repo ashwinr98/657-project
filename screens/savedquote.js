@@ -8,10 +8,12 @@ import {
   } from "react-native";
   import React, { useState, useEffect } from "react";
 
-  export default function SavedQuote() {
+  export default function SavedQuote({route, navigation}) {
+    const {username} = route.params;
+    console.log("hist name",username)
     const [savd, setSaved] = useState("")
-    const api_url = "https://semproject-9a86b-default-rtdb.firebaseio.com/quotes.json"
-
+    const api_url = `https://semproject-9a86b-default-rtdb.firebaseio.com/quotes/${username}.json`
+// 
     async function getapi(url)
     {
     const response = await fetch(url);

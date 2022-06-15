@@ -11,7 +11,11 @@ import {
 } from "react-native";
 import { initQuoteDB, storeQuoteItem } from "../helpers/fb-helper";
 export default function Quotes({route, navigation}){
-  
+
+  const {username} = route.params;
+  console.log("usr",username)
+  const name = username.match(/^([^@]*)@/)[1];
+  console.log("name",name)
   useEffect(() => {
     try {
       initQuoteDB();
@@ -25,7 +29,7 @@ export default function Quotes({route, navigation}){
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <TouchableOpacity onPress={() => navigation.navigate("SavedQuote")}>
+        <TouchableOpacity onPress={() => navigation.navigate("SavedQuote",{username:name})}>
           <Text style={styles.headerButton}> Saved </Text>
         </TouchableOpacity>
       ),
@@ -72,7 +76,7 @@ export default function Quotes({route, navigation}){
       style={styles.buttons}
       color='#8B8000'
       title="Save Quote"
-      onPress={() => storeQuoteItem(quote)}
+      onPress={() => storeQuoteItem(quote, name)}
         />
         
         </View>
