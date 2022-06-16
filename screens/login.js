@@ -13,7 +13,7 @@ import {
   TouchableWithoutFeedback
 } from "react-native";
  
-export default function Login({ navigation }) {
+export default function Login({ navigation, route }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailErrMsg,setEmailErrMsg] = useState("");
@@ -22,7 +22,14 @@ export default function Login({ navigation }) {
   const initialField = useRef(null);
   const [existingUsers, setExistingUsers] = useState([])
   const api_url = "https://semproject-9a86b-default-rtdb.firebaseio.com/users.json"
-  
+
+  useEffect(() => {
+    if (route.params?.fromCreateAccountPageFlagParam) {
+      console.log("Calling API Data Refresh After Create Account");
+      getExistingUsersData(api_url);
+    }
+  }, [route.params?.fromCreateAccountPageFlagParam]);
+
   useEffect(() => {
     getExistingUsersData(api_url) 
   },[]);

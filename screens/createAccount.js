@@ -98,7 +98,7 @@ export default function CreateAccount({route, navigation}) {
         if(displaySuccessMsg != '') {
             return(<View><Text style={styles.successMsg}>{displaySuccessMsg}</Text>
             <TouchableOpacity>
-            <Text style={{color: 'blue'}} onPress={() => navigation.navigate("Login")}>
+            <Text style={{color: 'blue'}} onPress={() => navigation.navigate("Login",{fromCreateAccountPageFlagParam:true})}>
              Go Back To Login Now</Text>
             </TouchableOpacity></View>);
         }
